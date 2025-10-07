@@ -2,29 +2,36 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../context/AuthProvider';
 
 const AllTask = () => {
-  const [userData, setUserData] = useContext(AuthContext);
+  const [userData] = useContext(AuthContext);
+
   return (
-    <div id='allTask' className='bg-[#1C1C1C] rounded h-65 p-7'>
-      <div className='bg-emerald-500 mb-2 py-3 px-5 font-bold flex justify-between rounded-xl'>
-        <h2 className='text-lg font-medium w-1/5'>Employee Name</h2>
-        <h3 className='text-lg font-medium w-1/5'>New Task</h3>
-        <h5 className='text-lg font-medium w-1/5'>Active Task</h5>
-        <h5 className='text-lg font-medium w-1/5'>Completed</h5>
-        <h5 className='text-lg font-medium w-1/5'>Failed</h5>
+    <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-lg border border-slate-700 p-6 h-[500px] m-5">
+      {/* Table Header */}
+      <div className="grid grid-cols-5 bg-emerald-600 text-white font-bold rounded-xl px-4 py-3 mb-3">
+        <span className="text-lg font-medium">Employee Name</span>
+        <span className="text-lg font-medium">New Task</span>
+        <span className="text-lg font-medium">Active Task</span>
+        <span className="text-lg font-medium">Completed</span>
+        <span className="text-lg font-medium">Failed</span>
       </div>
-      <div id='allTaskList' className='h-[80%] overflow-auto'>
-        {userData.employeesData.map(function (elem, idx) {
-          return <div key={idx} className='border-2 border-emerald-500 mb-2 py-3 px-5 flex justify-between rounded-xl'>
-            <h2 className='text-lg font-medium w-1/5'>{elem.firstname}</h2>
-            <h3 className='text-lg font-medium w-1/5 text-blue-600'>{elem.taskNumbers.newTask}</h3>
-            <h5 className='text-lg font-medium w-1/5 text-yellow-600'>{elem.taskNumbers.active}</h5>
-            <h5 className='text-lg font-medium w-1/5 text-green-600'>{elem.taskNumbers.completed}</h5>
-            <h5 className='text-lg font-medium w-1/5 text-red-600'>{elem.taskNumbers.failed}</h5>
+
+      {/* Employee Task List */}
+      <div className="h-[80%] overflow-y-auto">
+        {userData.employeesData.map((elem, idx) => (
+          <div
+            key={idx}
+            className="grid grid-cols-5 items-center text-white mb-2 px-4 py-3 rounded-xl border border-emerald-500 hover:bg-slate-600 transition-colors duration-200"
+          >
+            <span className="text-lg font-medium">{elem.firstname}</span>
+            <span className="text-lg font-medium text-blue-400">{elem.taskNumbers.newTask}</span>
+            <span className="text-lg font-medium text-yellow-400">{elem.taskNumbers.active}</span>
+            <span className="text-lg font-medium text-green-400">{elem.taskNumbers.completed}</span>
+            <span className="text-lg font-medium text-red-400">{elem.taskNumbers.failed}</span>
           </div>
-        })}
+        ))}
       </div>
     </div>
   );
-}
+};
 
 export default AllTask;
